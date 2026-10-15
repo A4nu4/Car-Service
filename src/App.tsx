@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { RootLayout } from "@/components/layout/RootLayout";
+import { HomePage } from "./pages/HomePage";
 
 function Placeholder({ title }: { title: string }) {
   return (
@@ -13,7 +14,7 @@ export default function App() {
   return (
     <Routes>
       <Route element={<RootLayout />}>
-        <Route index element={<Placeholder title="Home" />} />
+        <Route index element={<HomePage />} />
         <Route path="cars" element={<Placeholder title="Cars" />} />
         <Route path="locations" element={<Placeholder title="Locations" />} />
         <Route

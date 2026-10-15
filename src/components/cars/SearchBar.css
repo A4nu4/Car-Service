@@ -1,0 +1,31 @@
+.search-bar {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr auto;
+  align-items: end;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  border-radius: var(--radius-lg);
+}
+
+.search-bar.search-bar :focus-visible {
+  outline-color: var(--color-ink);
+}
+
+@media (max-width: 1024px) {
+  .search-bar {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-bar__submit {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .search-bar {
+    grid-template-columns: 1fr;
+    padding: var(--space-4);
+  }
+}

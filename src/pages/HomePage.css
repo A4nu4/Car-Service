@@ -1,0 +1,102 @@
+.hero {
+  padding: var(--space-10) 0 4.5rem;
+  background: var(--color-ink);
+  color: var(--color-on-dark);
+}
+
+.hero :focus-visible {
+  outline-color: var(--color-accent);
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.hero__title {
+  font-size: var(--text-hero);
+  line-height: 1.05;
+}
+
+.hero__title-line {
+  display: block;
+}
+
+.hero__lead {
+  max-width: 460px;
+  margin-top: var(--space-5);
+  font-size: var(--text-lg);
+  color: var(--color-on-dark-muted);
+}
+
+/* doubled class so it beats .media regardless of CSS import order */
+.hero .hero__media {
+  height: 260px;
+  border-radius: var(--radius-xl);
+  background: var(--color-ink-soft);
+  color: var(--color-on-dark-faint);
+}
+
+.hero__search {
+  margin-top: var(--space-12);
+}
+
+.popular {
+  padding-block: var(--space-16);
+}
+
+.popular__chips {
+  margin-bottom: var(--space-10);
+}
+
+.popular__title {
+  margin-bottom: var(--space-6);
+  font-size: var(--text-4xl);
+}
+
+.popular__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.popular__grid > li {
+  display: flex;
+}
+
+.popular__grid > li > * {
+  flex: 1;
+}
+
+@media (max-width: 960px) {
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .popular__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: var(--space-4);
+  }
+
+  .hero__title {
+    font-size: 2.125rem;
+  }
+
+  .hero .hero__media {
+    height: 200px;
+  }
+
+  .popular__grid {
+    grid-template-columns: 1fr;
+  }
+}

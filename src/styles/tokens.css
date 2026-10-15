@@ -13,6 +13,7 @@
   --color-on-dark: #ffffff;
   --color-on-dark-muted: #b7c2c9;
   --color-on-dark-faint: #8ca0ab;
+  --color-danger: #b42318;
 
   /* Fonts (load Sora + DM Sans in index.html) */
   --font-display: "Sora", system-ui, sans-serif;

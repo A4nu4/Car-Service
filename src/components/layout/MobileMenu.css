@@ -20,7 +20,6 @@
   background: rgb(16 24 32 / 0.6);
 }
 
-/* stop the page scrolling behind the open menu */
 body:has(.mobile-menu[open]) {
   overflow: hidden;
 }

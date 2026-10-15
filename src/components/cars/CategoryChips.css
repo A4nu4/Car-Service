@@ -1,0 +1,18 @@
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+@media (max-width: 600px) {
+  /* one scrollable row on phones */
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: var(--space-1);
+  }
+
+  .chips .btn {
+    flex: none;
+  }
+}

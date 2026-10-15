@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { ButtonLink } from "@/components/ui/Button";
 
 interface AuthActionsProps {
   variant?: "dark" | "light";
@@ -9,16 +9,18 @@ export function AuthActions({
   variant = "light",
   onNavigate,
 }: AuthActionsProps) {
-  const ghost = variant === "dark" ? "btn--ghost-on-dark" : "btn--ghost";
-
   return (
     <>
-      <Link to="/login" className={`btn ${ghost}`} onClick={onNavigate}>
+      <ButtonLink
+        to="/login"
+        variant={variant === "dark" ? "ghost-on-dark" : "ghost"}
+        onClick={onNavigate}
+      >
         Log in
-      </Link>
-      <Link to="/signup" className="btn" onClick={onNavigate}>
-        Sign Up
-      </Link>
+      </ButtonLink>
+      <ButtonLink to="/signup" onClick={onNavigate}>
+        Sign up
+      </ButtonLink>
     </>
   );
 }

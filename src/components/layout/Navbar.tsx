@@ -6,6 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import { NAV_LINKS } from "./navLinks";
 import { AuthActions } from "./AuthActions";
 import { MobileMenu } from "./MobileMenu";
+import { IconButton } from "../ui/Button";
 
 interface NavbarProps {
   variant?: "dark" | "light";
@@ -36,16 +37,15 @@ export function Navbar({ variant = "light" }: NavbarProps) {
         <AuthActions variant={variant} />
       </div>
 
-      <button
-        type="button"
-        className="icon-button navbar__menu-button"
-        aria-label="Open menu"
+      <IconButton
+        label="Open menu"
+        className="navbar__menu-button"
         aria-haspopup="dialog"
         aria-expanded={isSidebarOpen}
         onClick={() => setIsSidebarOpen(true)}
       >
         <MenuIcon />
-      </button>
+      </IconButton>
 
       <MobileMenu
         open={isSidebarOpen}

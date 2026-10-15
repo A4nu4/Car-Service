@@ -1,0 +1,20 @@
+.card {
+  overflow: hidden;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.card__body {
+  padding: var(--space-5);
+}
+
+.media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-placeholder);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  object-fit: cover;
+}

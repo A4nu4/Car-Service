@@ -1,0 +1,36 @@
+.car-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.car-card__media {
+  flex: none;
+  height: 180px;
+}
+
+.car-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-5);
+}
+
+.car-card__name {
+  font-size: var(--text-xl);
+}
+
+.car-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-5);
+}
+
+.car-card__price {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+}

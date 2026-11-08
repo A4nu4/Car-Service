@@ -1,0 +1,20 @@
+# Test-only values. The JWT secret here protects nothing real.
+spring:
+  datasource:
+    password: unused-overridden-by-tests
+  flyway:
+    clean-disabled: false
+
+app:
+  jwt:
+    secret: test-secret-key-that-is-at-least-32-bytes-long
+  cors:
+    allowed-origins: http://localhost:5173
+  bootstrap-admin:
+    email: ""
+    password: ""
+
+logging:
+  level:
+    com.carrental: INFO
+    org.hibernate.SQL: WARN

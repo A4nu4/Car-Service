@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { CloseIcon } from "@/components/ui/icons";
 import { NavLink } from "react-router-dom";
 import type { NavItem } from "./navLinks";

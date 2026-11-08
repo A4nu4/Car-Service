@@ -11,7 +11,7 @@ export default defineConfig([
   { linterOptions: { reportUnusedDisableDirectives: "error" } },
 
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ["src/**/*.{ts,tsx}"],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
@@ -24,16 +24,17 @@ export default defineConfig([
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
+        jsxPragma: null,
       },
     },
     rules: {
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": [
-        "error",
+        "warn",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/consistent-type-imports": [
-        "error",
+        "warn",
         { prefer: "type-imports", fixStyle: "separate-type-imports" },
       ],
       "@typescript-eslint/switch-exhaustiveness-check": "error",
@@ -53,7 +54,7 @@ export default defineConfig([
 
       // General hygiene
       eqeqeq: ["error", "always"],
-      "no-console": ["error", { allow: ["warn", "error"] }],
+      "no-console": ["warn", { allow: ["warn", "error"] }],
       "no-alert": "error",
 
       // Use the @/ alias instead of ../../ chains

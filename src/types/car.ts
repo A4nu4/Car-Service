@@ -6,6 +6,11 @@ export type FuelType = "petrol" | "diesel" | "hybrid" | "electric";
 
 export type CategoryFilter = CarCategory | "all";
 
+export interface FilterOption<T extends string = CategoryFilter> {
+  value: T;
+  label: string;
+}
+
 export interface Car {
   id: string;
   name: string;

@@ -3,19 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { CarCard } from "@/components/cars/CarCard";
 import { CategoryChips } from "@/components/cars/CategoryChips";
 import { SearchBar } from "@/components/cars/SearchBar";
-import { CARS } from "@/data/cars.mock";
+import { CardMedia } from "@/components/ui/Card";
 import { CATEGORY_FILTERS } from "@/data/labels";
+import { useCars } from "@/hooks/useCars";
 import type { CategoryFilter } from "@/types/car";
 import type { SearchValues } from "@/types/search";
-import { CardMedia } from "@/components/ui/Card";
 import "./HomePage.css";
 
 export function HomePage() {
   const navigate = useNavigate();
   const [category, setCategory] = useState<CategoryFilter>("all");
+  const { cars: allCars, isLoading, error } = useCars();
 
   const cars =
-    category === "all" ? CARS : CARS.filter((car) => car.category === category);
+    category === "all"
+      ? allCars
+      : allCars.filter((car) => car.category === category);
 
   function handleSearch(values: SearchValues) {
     const params = new URLSearchParams({
@@ -39,7 +42,7 @@ export function HomePage() {
             <div>
               <h1 className="hero__title">
                 <span className="hero__title-line">Pick up in minutes.</span>
-                <span className="help__title-line">Drive for days.</span>
+                <span className="hero__title-line">Drive for days.</span>
               </h1>
 
               <p className="hero__lead">
@@ -74,13 +77,23 @@ export function HomePage() {
             Popular right now
           </h2>
 
-          <ul className="popular__grid">
-            {cars.map((car) => (
-              <li key={car.id}>
-                <CarCard car={car} />
-              </li>
-            ))}
-          </ul>
+          {isLoading && <p role="status">Loading cars...</p>}
+
+          {error && <p role="alert">Couldn't load cars. Please try again.</p>}
+
+          {!isLoading && !error && cars.length === 0 && (
+            <p>No cars in this category.</p>
+          )}
+
+          {!isLoading && !error && cars.length > 0 && (
+            <ul className="popular__grid">
+              {cars.map((car) => (
+                <li key={car.id}>
+                  <CarCard car={car} />
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </section>
     </>

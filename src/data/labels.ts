@@ -19,3 +19,11 @@ export const CATEGORY_FILTERS: readonly FilterOption[] = [
   { value: "electric", label: CATEGORY_LABELS.electric },
   { value: "van", label: CATEGORY_LABELS.van },
 ];
+
+export function isCarCategory(value: string): value is CarCategory {
+  return Object.hasOwn(CATEGORY_LABELS, value);
+}
+
+export function isTransmission(value: string): value is Transmission {
+  return Object.hasOwn(TRANSMISSION_LABELS, value);
+}

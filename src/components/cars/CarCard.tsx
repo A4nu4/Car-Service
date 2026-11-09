@@ -1,9 +1,10 @@
+import "./CarCard.css";
+
 import { ButtonLink } from "@/components/ui/Button";
 import { Card, CardBody, CardMedia } from "@/components/ui/Card";
 import { CATEGORY_LABELS, TRANSMISSION_LABELS } from "@/data/labels";
 import type { Car } from "@/types/car";
 import { formatPrice } from "@/utils/formatPrice";
-import "./CarCard.css";
 
 interface CarCardProps {
   car: Car;

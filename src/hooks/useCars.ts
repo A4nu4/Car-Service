@@ -1,34 +1,19 @@
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
+
 import { fetchCars } from "@/api/cars";
-import type { Car } from "@/types/car";
-import { useEffect, useState } from "react";
+import type { SearchValues } from "@/types/search";
 
-export function useCars() {
-  const [cars, setCars] = useState<Car[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+type CarsSearch = Pick<SearchValues, "locationId" | "pickup" | "dropoff">;
 
-  useEffect(() => {
-    let cancelled = false;
-
-    fetchCars()
-      .then((data) => {
-        if (!cancelled) setCars(data);
-      })
-      .catch((err: unknown) => {
-        console.error("fetchCars failed:", err);
-        if (!cancelled) {
-          setError(
-            err instanceof Error ? err : new Error("Failed to load cars"),
-          );
-        }
-      })
-      .finally(() => {
-        if (!cancelled) setIsLoading(false);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-  return { cars, isLoading, error };
+export function useCars(search: CarsSearch) {
+  return useQuery({
+    queryKey: ["cars", search.locationId, search.pickup, search.dropoff],
+    queryFn: () =>
+      fetchCars({
+        locationId: search.locationId || undefined,
+        pickupAt: search.pickup || undefined,
+        dropoffAt: search.dropoff || undefined,
+      }),
+    placeholderData: keepPreviousData,
+  });
 }

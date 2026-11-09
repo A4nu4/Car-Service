@@ -1,19 +1,28 @@
+import "./HomePage.css";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import { CarCard } from "@/components/cars/CarCard";
 import { CategoryChips } from "@/components/cars/CategoryChips";
 import { SearchBar } from "@/components/cars/SearchBar";
+import { Button } from "@/components/ui/Button";
 import { CardMedia } from "@/components/ui/Card";
 import { CATEGORY_FILTERS } from "@/data/labels";
 import { useCars } from "@/hooks/useCars";
 import type { CategoryFilter } from "@/types/car";
 import type { SearchValues } from "@/types/search";
-import "./HomePage.css";
+import { EMPTY_SEARCH, toSearchParams } from "@/utils/searchParams";
 
 export function HomePage() {
   const navigate = useNavigate();
   const [category, setCategory] = useState<CategoryFilter>("all");
-  const { cars: allCars, isLoading, error } = useCars();
+  const {
+    data: allCars = [],
+    isPending,
+    isError,
+    refetch,
+  } = useCars(EMPTY_SEARCH);
 
   const cars =
     category === "all"
@@ -21,15 +30,10 @@ export function HomePage() {
       : allCars.filter((car) => car.category === category);
 
   function handleSearch(values: SearchValues) {
-    const params = new URLSearchParams({
-      location: values.location,
-      pickup: values.pickup,
-      dropoff: values.dropoff,
+    void navigate({
+      pathname: "/cars",
+      search: toSearchParams(values).toString(),
     });
-    if (values.category !== "any") {
-      params.set("type", values.category);
-    }
-    void navigate({ pathname: "/cars", search: params.toString() });
   }
 
   return (
@@ -77,15 +81,27 @@ export function HomePage() {
             Popular right now
           </h2>
 
-          {isLoading && <p role="status">Loading cars...</p>}
+          {isPending && <p role="status">Loading cars...</p>}
 
-          {error && <p role="alert">Couldn't load cars. Please try again.</p>}
+          {isError && (
+            <div role="alert">
+              <p>Couldn't load cars.</p>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  void refetch();
+                }}
+              >
+                Try again
+              </Button>
+            </div>
+          )}
 
-          {!isLoading && !error && cars.length === 0 && (
+          {!isPending && !isError && cars.length === 0 && (
             <p>No cars in this category.</p>
           )}
 
-          {!isLoading && !error && cars.length > 0 && (
+          {!isPending && !isError && cars.length > 0 && (
             <ul className="popular__grid">
               {cars.map((car) => (
                 <li key={car.id}>

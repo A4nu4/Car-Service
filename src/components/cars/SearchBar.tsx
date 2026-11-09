@@ -1,10 +1,11 @@
-import { useState } from "react";
-import type { FormEvent } from "react";
+import "./SearchBar.css";
+
+import { type FormEvent, useState } from "react";
+
 import { Button } from "@/components/ui/Button";
 import { SelectField, TextField } from "@/components/ui/Field";
 import { CATEGORY_LABELS } from "@/data/labels";
 import type { SearchValues } from "@/types/search";
-import "./SearchBar.css";
 
 interface SearchBarProps {
   initialValues?: Partial<SearchValues>;
@@ -12,7 +13,7 @@ interface SearchBarProps {
 }
 
 const EMPTY_VALUES: SearchValues = {
-  location: "",
+  locationId: "",
   pickup: "",
   dropoff: "",
   category: "any",
@@ -52,9 +53,9 @@ export function SearchBar({ initialValues, onSearch }: SearchBarProps) {
         placeholder="City or airport"
         autoComplete="off"
         required
-        value={values.location}
+        value={values.locationId}
         onChange={(event) => {
-          update("location", event.target.value);
+          update("locationId", event.target.value);
         }}
       />
       <TextField

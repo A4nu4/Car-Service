@@ -4,6 +4,8 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import { defineConfig, globalIgnores } from "eslint/config";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import importX from "eslint-plugin-import-x";
 
 export default defineConfig([
   globalIgnores(["dist", "coverage"]),
@@ -27,15 +29,23 @@ export default defineConfig([
         jsxPragma: null,
       },
     },
+    plugins: {
+      "simple-import-sort": simpleImportSort,
+      "import-x": importX,
+    },
     rules: {
       "no-unused-vars": "off",
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+      "import-x/no-duplicates": ["error", { "prefer-inline": true }],
+      "@typescript-eslint/no-import-type-side-effects": "error",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/consistent-type-imports": [
         "warn",
-        { prefer: "type-imports", fixStyle: "separate-type-imports" },
+        { prefer: "type-imports", fixStyle: "inline-type-imports" },
       ],
       "@typescript-eslint/switch-exhaustiveness-check": "error",
       // allow onClick={async () => ...}

@@ -1,11 +1,14 @@
-import { useState } from "react";
 import "./Navbar.css";
-import { MenuIcon } from "@/components/ui/icons";
+
+import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { NAV_LINKS } from "./navLinks";
+
+import { IconButton } from "@/components/ui/Button";
+import { MenuIcon } from "@/components/ui/icons";
+
 import { AuthActions } from "./AuthActions";
 import { MobileMenu } from "./MobileMenu";
-import { IconButton } from "@/components/ui/Button";
+import { NAV_LINKS } from "./navLinks";
 
 interface NavbarProps {
   variant?: "dark" | "light";
